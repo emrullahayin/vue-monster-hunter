@@ -18,7 +18,7 @@
                     <div class="healthbar text-center"
                         style="background-color: green; margin: 0; color: white; transition: all .3s linear;"
                         :style="{width: my_heart + '%'}">
-                        {{my_heart}}
+                        {{my_heart}}%
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <div class="healthbar text-center"
                         style="background-color: green; margin: 0; color: white; transition: all .3s linear;"
                         :style="{width: monster_heart + '%'}">
-                        {{monster_heart}}
+                        {{monster_heart}}%
                     </div>
                 </div>
             </div>
@@ -40,17 +40,17 @@
         </section>
         <section class="row controls" v-if="start_game">
             <div class="small-12 columns">
-                <button id="attack" @click="">SALDIRI</button>
-                <button id="special-attack" @click="">ÖZEL SALDIRI</button>
-                <button id="heal" @click="">İLK YARDIM</button>
-                <button id="give-up" @click="">PES ET!</button>
+                <button id="attack" @click="attack">SALDIRI</button>
+                <button id="special-attack" @click="special_attack">ÖZEL SALDIRI</button>
+                <button id="heal" @click="heart_up" :disabled="my_heart === 100">İLK YARDIM</button>
+                <button id="give-up" @click="give_up">PES ET!</button>
             </div>
         </section>
-        <section class="row log">
+        <section class="row log" v-if="logs.length">
             <div class="small-12 columns">
                 <ul>
-                    <li>
-
+                    <li v-for="log in logs" :class="log.turn === 'p' ? 'player-turn' : 'monster-turn'">
+                        {{ log.turn }}: {{ log.text }}
                     </li>
                 </ul>
             </div>
