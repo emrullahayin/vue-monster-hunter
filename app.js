@@ -62,6 +62,7 @@ window.onload = function() {
         }
         this.my_heart = 100;
         this.monster_heart = 100;
+        this.logs = [];
       },
       add_to_log: function(log) {
         this.logs.push(log);
